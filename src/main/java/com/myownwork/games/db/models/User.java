@@ -1,4 +1,4 @@
-package com.myownwork.games.db;
+package com.myownwork.games.db.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +17,7 @@ public class User {
   private String password;
   private String status;
   
-  
-  
+    
   //Getter and Setters
   public Integer getId() {
     return id;
