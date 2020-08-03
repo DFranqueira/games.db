@@ -1,5 +1,8 @@
 package com.myownwork.games.db.controllers;
 
+import java.util.Date;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +39,16 @@ public class UserController {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
 
-	User savedUser = userRepository.save(user);
-	if(userRepository.existsById(savedUser.getId())) {
+	if(user.getId() == null) {
+		User savedUser = userRepository.save(user);
 		return "User saved. ID = "+savedUser.getId();
-	} else {
+	} else if(!userRepository.existsById(user.getId())) {
+		User savedUser = userRepository.save(user);
+		return "User saved. ID = "+savedUser.getId();
+	}else {
 		return "Could NOT save user. ID = "+user.getId();
 	}
+	
   }
   
   
@@ -50,8 +57,13 @@ public class UserController {
     // @ResponseBody means the returned String is the response, not a view name
     // @RequestParam means it is a parameter from the GET or POST request
 
+	  //Date Handling
+	 Date now = new Date(); 
 	 Integer userId = user.getId();
-	 if(userRepository.existsById(userId)) {
+	 user.setUpdateDate(now);
+	 Boolean userExists = userRepository.existsById(userId);
+	 
+	 if(userExists) {
 		 userRepository.save(user);
 		 return "Updated user ID \"" + userId + "\" successfully!";
 	 } else {

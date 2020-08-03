@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.*;
 
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
@@ -16,6 +17,8 @@ public class User {
   private String username;
   private String password;
   private String status;
+  private Date creationDate;
+  private Date updateDate = null;
   
     
   //Getter and Setters
@@ -65,6 +68,22 @@ public class User {
 
   public void setStatus(String status) {
     this.status = status;
+  }
+  
+  public Date getCreationDate() {
+	  return creationDate;
+  }
+  
+  public void setCreationDate(Date creationDate) {
+	  this.creationDate = creationDate;
+  }
+  
+  public Date getUpdateDate() {
+	  return updateDate;
+  }
+  
+  public void setUpdateDate(Date updateDate) {
+	  this.updateDate = updateDate;
   }
   
 }
